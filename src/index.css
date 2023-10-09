@@ -5,6 +5,52 @@
   font-family: "Poppins", sans-serif;
 }
 
+/* Navbar */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1.3rem;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+header nav .logo {
+  color: #fff;
+  font-weight: 600;
+  font-size: 2.1rem;
+  text-decoration: none;
+}
+
+header nav .logo span {
+  color: #c06b3e;
+}
+
+header nav > ul:first-of-type {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+}
+
+header nav > ul:first-of-type a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+header nav > ul:first-of-type a:hover {
+  color: #c06b3e;
+}
+
+/* Section */
+
 main section.hero-section {
   height: 100vh;
   background-image: url("../assets/coffee.jpeg");
@@ -25,6 +71,7 @@ section.hero-section .content h2 {
   font-size: 3rem;
   max-width: 70%;
   line-height: 1.4;
+  text-transform: capitalize;
 }
 
 section.hero-section .content p {
