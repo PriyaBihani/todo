@@ -96,3 +96,81 @@ section.hero-section .content button:hover {
   background-color: #c06b3e;
   color: #fff;
 }
+
+#close-menu-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #000;
+  cursor: pointer;
+  display: none;
+}
+
+#hamburger-btn {
+  color: #fff;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  /* Navbar */
+
+  #close-menu-btn,
+  #hamburger-btn {
+    display: block;
+  }
+
+  nav > ul:first-of-type {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    height: 100vh;
+    background-color: #fff;
+    width: 250px;
+    flex-direction: column;
+    padding: 70px 40px;
+    font-size: 16px;
+  }
+
+  header.toggle-navbar nav > ul:first-of-type {
+    left: 0;
+  }
+
+  header.toggle-navbar nav > ul:first-of-type a {
+    color: #000;
+  }
+
+  header.toggle-navbar::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+  }
+
+  /* Section */
+
+  section.hero-section .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0.3rem;
+  }
+
+  section.hero-section .content h2 {
+    max-width: 100%;
+  }
+
+  section.hero-section .content p {
+    max-width: 100%;
+  }
+}
