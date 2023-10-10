@@ -12,50 +12,41 @@
     />
   </head>
   <body>
-    <!-- alignment -->
-    <p class="text-center display-4">lorem sdflk</p>
-    <p class="display-4 text-end">lorem sdflk</p>
-    <p class="display-4 text-start">lorem sdflk</p>
-    <!-- text-decoration & font-weight -->
+    <!-- margin and padding -->
+    <div class="bg-primary m-1 p-1">small margin and small padding</div>
+    <div class="bg-warning m-3 p-2">middle margin and mid padding</div>
+    <div class="bg-danger m-5 p-5">middle margin and mid padding</div>
+    <div class="bg-warning mx-5 py-5">margin in x and padding in y</div>
+    <div class="bg-primary mt-1 mb-3 ms-2 me-4 pt-3 pb-1 ps-4 pe-2">
+      m & p for each direction
+    </div>
 
-    <span class="text-decoration-underline">lorem sdflk</span>
-    <p class="text-decoration-line-through">lorem sdflk</p>
-    <span class="fw-bold">lorem sdflk</span>
-    <small>Lorem ipsum dolor sit amet.</small>
-    <!-- text and bg colors -->
-    <p class="text-primary">
-      Lorem ipsum dolor sit amet consectetur adipisicing.
-    </p>
-    <p class="text-secondary">
-      Lorem ipsum dolor sit amet consectetur adipisicing.
-    </p>
-    <p class="text-info">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-    <p class="text-success">
-      Lorem ipsum dolor sit amet consectetur adipisicing.
-    </p>
-    <p class="text-danger">
-      Lorem ipsum dolor sit amet consectetur adipisicing.
-    </p>
-    <p class="text-warning">
-      Lorem ipsum dolor sit amet consectetur adipisicing.
-    </p>
+    <!-- borders -->
+    <div class="m-3 p-3 border">default border</div>
+    <div class="m-3 p-3 border-top border-start">individual border</div>
+    <div class="m-3 p-3 border-end border-success border-5">
+      border success at end
+    </div>
+    <div class="m-3 p-3 border-primary border-3 border-start">
+      individual border
+    </div>
 
-    <!-- Background -->
-    <p class="text-white bg-primary">
-      Lorem ipsum dolor sit amet consectetur adipisicing.
-    </p>
-    <p class="text-dark bg-warning">
-      Lorem ipsum dolor, sit amet consectetur adipisicing.
-    </p>
-    <!-- buttons -->
-    <button class="btn btn-primary">button 1</button>
-    <button class="btn btn-danger">button 2</button>
+    <div class="m-3 p-3 rounded border border-5">rounded corners</div>
+    <div class="m-3 p-3 rounded-pill border border-primary border-5">
+      rounded corners
+    </div>
 
-    <a href="#" class="btn btn-info">link as button</a>
-    <a href="#" class="btn btn-secondary">link as button</a>
+    <!-- box shadow -->
+    <div class="m-3 p-3 shadow">elem witg box shadow</div>
+    <div class="m-3 p-3 shadow-lg">elem witg large box shadow</div>
+    <div class="m-3 p-3 shadow-sm">elem witg small box shadow</div>
 
-    <button class="btn btn-success btn-lg">Button large</button>
-    <button class="btn btn-success btn-sm">Button small</button>
+    <!-- font weight -->
+
+    <p class="fw-bold">Bold text</p>
+    <p class="fw-bolder">Bolder text</p>
+    <p>normal text</p>
+    <p class="fw-light">Light text</p>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
