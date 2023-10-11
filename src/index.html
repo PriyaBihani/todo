@@ -12,42 +12,67 @@
     />
   </head>
   <body>
-    <!-- containers -->
-
-    <div class="container my-5">
-      <h2>Normal containers</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus suscipit
-        odio corporis fugiat qui praesentium ex ullam enim animi
-      </p>
+    <div class="container-lg my-5">
+      <h2>Basic grid</h2>
+      <div class="row">
+        <div class="col">
+          <div class="bg-primary p-5 text-light">col 1</div>
+        </div>
+        <div class="col">
+          <div class="bg-danger p-5 text-light">col 2</div>
+        </div>
+        <div class="col">
+          <div class="bg-primary p-5 text-light">col 3</div>
+        </div>
+        <div class="col">
+          <div class="bg-primary p-5 text-light">col 4</div>
+        </div>
+      </div>
     </div>
 
     <div class="container-lg my-5">
-      <h2>large containers</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus suscipit
-        odio corporis fugiat qui praesentium ex ullam enim animi totam
-      </p>
+      <h2>Columns width</h2>
+      <div class="row">
+        <div class="col-6">
+          <div class="bg-primary p-5 text-light">col 1</div>
+        </div>
+        <div class="col-3">
+          <div class="bg-danger p-5 text-light">col 2</div>
+        </div>
+        <div class="col-3">
+          <div class="bg-primary p-5 text-light">col 3</div>
+        </div>
+      </div>
     </div>
 
-    <div class="container-fluid my-5">
-      <h2>Fluid containers</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus suscipit
-        odio corporis fugiat qui praesentium ex ullam enim animi
-      </p>
+    <div class="container-lg my-5">
+      <h2>Responsive grid</h2>
+      <div class="row">
+        <div class="col-sm-4 col-lg-6">
+          <div class="bg-primary p-5 text-light">col 1</div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+          <div class="bg-danger p-5 text-light">col 2</div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+          <div class="bg-primary p-5 text-light">col 3</div>
+        </div>
+      </div>
     </div>
 
-    <!-- breakpoints -->
-
-    <div class="bg-primary p-sm-5 p-1">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque,
-      repellendus?
-    </div>
-
-    <div class="bg-danger m-md-5 m-sm-3 m-1">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque,
-      repellendus?
+    <div class="container-lg my-5">
+      <h2>justifying columns</h2>
+      <div class="row justify-content-between">
+        <div class="col-md-3">
+          <div class="bg-primary p-5 text-light">col 1</div>
+        </div>
+        <div class="col-md-3">
+          <div class="bg-primary p-5 text-light">col 1</div>
+        </div>
+        <div class="col-md-3">
+          <div class="bg-primary p-5 text-light">col 1</div>
+        </div>
+      </div>
     </div>
 
     <script
