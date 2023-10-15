@@ -1,45 +1,41 @@
-/*
-    1. Indentifiers
-    2. keywords - var, let, const
-    3. store the data
-*/
+// String
 
-let firstName; // declaration of variable
-firstName = "Priya"; // assigning a value
-console.log(firstName);
-firstName = "Priyanka";
-console.log(firstName);
+const fullName = "Priya Bihani";
 
-let lastName = "Bihani"; // initialization of variable
-let lastname = "shdfhds";
-console.log(lastName);
+// Number
+const age = 21;
+const num = 21.56;
 
-const age = 20;
-console.log(age);
+// Boolean
+const healthIsWealth = true;
 
-/** Naming varibale rules
- *  1. letter, numbers, _ , $
- *  2. cannot start with number
- *  3. case sensitive
- * 4. keywords cannot be used as variable name
- */
+// Null
+const nothing = null;
 
-/** Fromatting conventions
- *  1. camelCase: firstName, lastName, ageOfPerson
- *  2. PascalCase: FirstName, LastName, AgeOfPerson
- *  3 underscore: first_name, last_name, age_of_person
- */
+// Undefined
+// let something;
 
-// Declaration and initialization of multiple variables in single statement
+const something = undefined;
 
-let a, b, c;
+// Symbol
+const sym = Symbol("this is a symbol");
 
-a = 10;
+// BigInt
+const bigInteger = 1234567890123456789012345678901234567890n;
 
-console.log(a);
+// Object
+const person = {
+  firstName: "Priya",
+  age: 21,
+};
 
-let d = 30,
-  f = 50,
-  z;
+// Array
+const numArr = [1, 4, 6, 90];
 
-console.log(d, f, z);
+// Function
+function sayHello() {
+  console.log("Hello");
+}
+
+const output = sayHello;
+console.log(output, typeof output);
