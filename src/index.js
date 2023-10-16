@@ -1,41 +1,55 @@
-// String
+// 1. Arithmetic Operators
 
-const fullName = "Priya Bihani";
+let x;
 
-// Number
-const age = 21;
-const num = 21.56;
+x = 5 + 5;
+x = 5 - 5;
+x = 5 * 5;
+x = 5 / 5;
+x = 7 % 5;
 
-// Boolean
-const healthIsWealth = true;
+// Concatenation
 
-// Null
-const nothing = null;
+x = "Hello" + " " + "World";
 
-// Undefined
-// let something;
+// Exponent
 
-const something = undefined;
+x = 2 ** 3;
 
-// Symbol
-const sym = Symbol("this is a symbol");
+// Increment
+x = 1;
+// x = x + 1;
+x++;
 
-// BigInt
-const bigInteger = 1234567890123456789012345678901234567890n;
+// Decrement
+x = 1;
+// x = x - 1;
+x--;
 
-// Object
-const person = {
-  firstName: "Priya",
-  age: 21,
-};
+// 2. Assignment Operators
 
-// Array
-const numArr = [1, 4, 6, 90];
+x = 10;
 
-// Function
-function sayHello() {
-  console.log("Hello");
-}
+x += 5; // x = x + 5;
+x -= 5; // x = x - 5;
+x *= 5; // x = x * 5;
+x /= 5; // x = x / 5;
+x %= 5; // x = x % 5;
+x **= 5; // x = x ** 5;
 
-const output = sayHello;
-console.log(output, typeof output);
+// 3. Comparison Operators
+
+x = 2 == 2;
+x = 2 == "2"; // true
+x = 2 === "2"; // false
+
+x = 2 != 2; // false
+x = 2 != "2"; // false
+x = 2 !== "2"; // true
+
+x = 10 > 5;
+x = 10 < 5;
+x = 10 <= 5;
+x = 10 >= 5;
+
+console.log(x);
