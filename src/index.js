@@ -1,55 +1,48 @@
-// 1. Arithmetic Operators
+let amount;
 
-let x;
+// Convert to number
+// amount = "100";
+// amount = true;
+// amount = false;
+// amount = null;
+// amount = undefined;
+// amount = "hello";
+// amount = "100.20";
+// amount = Number(amount);
 
-x = 5 + 5;
-x = 5 - 5;
-x = 5 * 5;
-x = 5 / 5;
-x = 7 % 5;
+// amount = +amount;
+// amount = parseInt(amount);
+// amount = parseFloat(amount);
 
-// Concatenation
+// Convert to string
+// amount = 100;
+// amount = amount.toString();
+// amount = String(amount);
+// amount = amount + "";
 
-x = "Hello" + " " + "World";
+// Convert to Boolean
+// amount = 0;
+// amount = 100;
+// amount = -100;
+// amount = null;
+// amount = undefined;
+// amount = "sjfsdl";
+// amount = "";
+// amount = Boolean(amount);
 
-// Exponent
+// Ways to get NaN
+// console.log("hello" % 10);
+// console.log(undefined + undefined);
+// console.log(Math.sqrt(-1));
 
-x = 2 ** 3;
+// ================ type coercion ================
 
-// Increment
-x = 1;
-// x = x + 1;
-x++;
+amount = 5;
+// amount = amount * "5";
+// amount = amount + true;
+// amount = amount + false;
+// amount = amount + null;
+// amount = amount + undefined;
+// amount = amount + "";
 
-// Decrement
-x = 1;
-// x = x - 1;
-x--;
-
-// 2. Assignment Operators
-
-x = 10;
-
-x += 5; // x = x + 5;
-x -= 5; // x = x - 5;
-x *= 5; // x = x * 5;
-x /= 5; // x = x / 5;
-x %= 5; // x = x % 5;
-x **= 5; // x = x ** 5;
-
-// 3. Comparison Operators
-
-x = 2 == 2;
-x = 2 == "2"; // true
-x = 2 === "2"; // false
-
-x = 2 != 2; // false
-x = 2 != "2"; // false
-x = 2 !== "2"; // true
-
-x = 10 > 5;
-x = 10 < 5;
-x = 10 <= 5;
-x = 10 >= 5;
-
-console.log(x);
+console.log(amount, typeof amount);
