@@ -1,48 +1,29 @@
-let amount;
+function sayHello() {
+  console.log("Hello, World!");
+}
 
-// Convert to number
-// amount = "100";
-// amount = true;
-// amount = false;
-// amount = null;
-// amount = undefined;
-// amount = "hello";
-// amount = "100.20";
-// amount = Number(amount);
+sayHello(); //
 
-// amount = +amount;
-// amount = parseInt(amount);
-// amount = parseFloat(amount);
+function add(num1, num2) {
+  console.log(num1 + num2);
+}
 
-// Convert to string
-// amount = 100;
-// amount = amount.toString();
-// amount = String(amount);
-// amount = amount + "";
+add(1, 2);
+// add(56, 78);
+// sayHello();
 
-// Convert to Boolean
-// amount = 0;
-// amount = 100;
-// amount = -100;
-// amount = null;
-// amount = undefined;
-// amount = "sjfsdl";
-// amount = "";
-// amount = Boolean(amount);
+function subtract(num1, num2) {
+  return num1 - num2;
+  console.log("this will never happen");
+}
 
-// Ways to get NaN
-// console.log("hello" % 10);
-// console.log(undefined + undefined);
-// console.log(Math.sqrt(-1));
+let res = subtract(3, 5);
 
-// ================ type coercion ================
+res += 90;
+console.log(res);
 
-amount = 5;
-// amount = amount * "5";
-// amount = amount + true;
-// amount = amount + false;
-// amount = amount + null;
-// amount = amount + undefined;
-// amount = amount + "";
+const myFunction = function () {
+  console.log("Hello from myFunction");
+};
 
-console.log(amount, typeof amount);
+myFunction();
