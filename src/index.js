@@ -1,30 +1,24 @@
+// Nesting
 let x;
-const arr = [22, 44, 345, 78, 900];
+const fruits = ["Apple", "Orange", "Banana", "Pineapple", "Mango"];
 
-// x = arr.push(10);
+const berries = ["Strawberry", "Blueberry", "Blackberry"];
 
-// arr.pop();
-// arr.pop();
-// x = arr.pop();
+// fruits.push(berries);
 
-// x = arr.unshift(10);
+// x = fruits[5][1];
 
-// x = arr.shift();
+// const allFruits = [fruits, berries];
+// x = allFruits[1][2];
 
-// arr.reverse();
+// concat
+x = fruits.concat(berries);
 
-x = arr.includes(999);
+// spread operator (...)
+x = [...fruits, ...berries];
 
-x = arr.indexOf(345);
+// Array
 
-x = arr.toString();
-x = arr.join();
-
-x = arr.slice(1, 4);
-
-// x = arr.splice(2, 1);
-// x = arr.splice(2, 2);
-
-x = arr.slice(1, 4).reverse().toString();
+x = Array.isArray("lkjsldf");
 
 console.log(x);
