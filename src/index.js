@@ -1,27 +1,30 @@
 let x;
-// Array Literal
-const numbers = [1, 67, 55, 90, 500];
-const mixed = [56, "hello", true, null];
+const arr = [22, 44, 345, 78, 900];
 
-// Array Constructor
-const fruits = new Array("Apple", "Banana", "Orange", "Mango");
+// x = arr.push(10);
 
-x = fruits.length;
+// arr.pop();
+// arr.pop();
+// x = arr.pop();
 
-x = numbers[2] + numbers[0];
+// x = arr.unshift(10);
 
-x = "this is a " + numbers[2];
+// x = arr.shift();
 
-// Manipulating Arrays
-fruits[1] = "Pineapple";
-fruits[3] = "Kiwi";
+// arr.reverse();
 
-fruits[fruits.length] = "Watermelon";
+x = arr.includes(999);
 
-fruits.length = 2;
+x = arr.indexOf(345);
 
-// console.log(x);
-// console.log(mixed);
-console.log(fruits);
-// console.log(numbers);
-// console.log(numbers[3], numbers[1]);
+x = arr.toString();
+x = arr.join();
+
+x = arr.slice(1, 4);
+
+// x = arr.splice(2, 1);
+// x = arr.splice(2, 2);
+
+x = arr.slice(1, 4).reverse().toString();
+
+console.log(x);
