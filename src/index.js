@@ -1,29 +1,27 @@
-function sayHello() {
-  console.log("Hello, World!");
-}
+let x;
+// Array Literal
+const numbers = [1, 67, 55, 90, 500];
+const mixed = [56, "hello", true, null];
 
-sayHello(); //
+// Array Constructor
+const fruits = new Array("Apple", "Banana", "Orange", "Mango");
 
-function add(num1, num2) {
-  console.log(num1 + num2);
-}
+x = fruits.length;
 
-add(1, 2);
-// add(56, 78);
-// sayHello();
+x = numbers[2] + numbers[0];
 
-function subtract(num1, num2) {
-  return num1 - num2;
-  console.log("this will never happen");
-}
+x = "this is a " + numbers[2];
 
-let res = subtract(3, 5);
+// Manipulating Arrays
+fruits[1] = "Pineapple";
+fruits[3] = "Kiwi";
 
-res += 90;
-console.log(res);
+fruits[fruits.length] = "Watermelon";
 
-const myFunction = function () {
-  console.log("Hello from myFunction");
-};
+fruits.length = 2;
 
-myFunction();
+// console.log(x);
+// console.log(mixed);
+console.log(fruits);
+// console.log(numbers);
+// console.log(numbers[3], numbers[1]);
