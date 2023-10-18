@@ -1,24 +1,57 @@
-// Nesting
-let x;
-const fruits = ["Apple", "Orange", "Banana", "Pineapple", "Mango"];
+let output;
+const person = {
+  fullName: "Priya Bihani",
+  age: 21,
+  isAdmin: true,
+  hobbies: ["Reading", "Writing", "Coding"],
+  //   address: {
+  //     city: "Jaipur",
+  //     state: "Rajasthan",
+  //     coordinates: {
+  //       lat: "89.900",
+  //       log: "90.000",
+  //     },
+  //   },
 
-const berries = ["Strawberry", "Blueberry", "Blackberry"];
+  greet() {
+    // console.log(this, "this");
+    console.log("Hello, my name is " + this.fullName + ".");
+  },
+};
 
-// fruits.push(berries);
+output = person.fullName; // dot notation
+output = person["age"]; // bracket notation
 
-// x = fruits[5][1];
+// Updating
+person.fullName = "Kavya Bihani";
+person.isAdmin = false;
 
-// const allFruits = [fruits, berries];
-// x = allFruits[1][2];
+// Adding
+person.gradutationYear = 2023;
 
-// concat
-x = fruits.concat(berries);
+// Deleting
+delete person.age;
 
-// spread operator (...)
-x = [...fruits, ...berries];
+person.address = {
+  city: "Jaipur",
+  state: "Rajasthan",
+  coordinates: {
+    lat: "89.900",
+    log: "90.000",
+  },
+};
 
-// Array
+output = person.hobbies[1];
 
-x = Array.isArray("lkjsldf");
+output = person.address.state;
+output = person.address.coordinates.lat;
 
-console.log(x);
+// person.greet = function () {
+//   console.log(this, "this");
+//   console.log("Hello, my name is " + this.fullName + ".");
+// };
+
+output = person;
+person.greet();
+
+console.log(output);
