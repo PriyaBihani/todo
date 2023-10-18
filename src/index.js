@@ -1,57 +1,53 @@
-let output;
-const person = {
-  fullName: "Priya Bihani",
-  age: 21,
-  isAdmin: true,
-  hobbies: ["Reading", "Writing", "Coding"],
-  //   address: {
-  //     city: "Jaipur",
-  //     state: "Rajasthan",
-  //     coordinates: {
-  //       lat: "89.900",
-  //       log: "90.000",
-  //     },
-  //   },
+const person = new Object(); // Object constructor syntax
 
-  greet() {
-    // console.log(this, "this");
-    console.log("Hello, my name is " + this.fullName + ".");
-  },
-};
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
 
-output = person.fullName; // dot notation
-output = person["age"]; // bracket notation
+console.log(person);
 
-// Updating
-person.fullName = "Kavya Bihani";
-person.isAdmin = false;
+const obj1 = { a: 1, b: 5, c: 10 };
+const obj2 = { d: 67, e: 89, f: 90 };
 
-// Adding
-person.gradutationYear = 2023;
+// spread operator
+const obj3 = { ...obj1, ...obj2 };
 
-// Deleting
-delete person.age;
+const obj4 = Object.assign({}, obj1, obj2);
 
-person.address = {
-  city: "Jaipur",
-  state: "Rajasthan",
-  coordinates: {
-    lat: "89.900",
-    log: "90.000",
-  },
-};
+// Array of Objects
+const arr = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Doe" },
+  { id: 3, name: "Jane" },
+];
 
-output = person.hobbies[1];
+let output = arr[1].name;
 
-output = person.address.state;
-output = person.address.coordinates.lat;
+output = Object.keys(person);
 
-// person.greet = function () {
-//   console.log(this, "this");
-//   console.log("Hello, my name is " + this.fullName + ".");
-// };
+output = Object.keys(person).length;
 
-output = person;
-person.greet();
+output = Object.values(person);
+
+output = Object.entries(person);
+
+output = person.hasOwnProperty("isAdmin");
+
+output = "isAdmin" in person;
 
 console.log(output);
+
+// Naming
+
+const firstName = "Priya";
+const lastName = "Bihani";
+
+const person2 = {
+  firstName,
+  lastName,
+  greet() {
+    return `Hello ${this.firstName} ${this.lastName}`;
+  },
+};
+console.log(person2.greet());
+console.log(person2);
