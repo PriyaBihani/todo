@@ -1,33 +1,42 @@
-const toDo = {
-  todo_id: 1,
-  title: "Create Videos",
-  user: {
-    name: "Priya Bihani",
-  },
-};
+let output;
 
-// Converting the object to JSON string
-const str = JSON.stringify(toDo);
-console.log(str);
+const fullName = "Priya bihani"; // primitive
+const age = 21;
 
-// Converting the JSON string to object
-const obj = JSON.parse(str);
-console.log(obj);
+output = "My name is " + fullName + ". and my age is " + age + " years old";
 
-// Destructuring
-const {
-  todo_id,
-  title: todo_title,
-  user,
-  user: { name },
-} = toDo;
+// Template literals
+// output = `My name is ${fullName}. and my age is ${age} years old`;
 
-console.log(todo_id, todo_title, name, user);
+// String constructor
+const s = new String("Hello World"); // reference type
 
-// Arrays Destructuring
+// console.log(typeof output, typeof s);
 
-const arr = [34, 56, 78, 98, 100];
+// String methods
 
-const [first, second, ...rest] = arr;
+output = s.length;
+output = fullName.length;
 
-console.log(first, second, rest);
+output = s.toUpperCase();
+output = fullName.toUpperCase();
+
+output = s.toLowerCase();
+
+output = s[2];
+
+output = s.charAt(4);
+
+output = s.substring(0, 7);
+
+output = s.indexOf("W");
+output = s.indexOf("World");
+
+output = "           Hello world";
+output = output.trim();
+
+output = s.valueOf();
+
+output = s.split(" ");
+
+console.log(output);
