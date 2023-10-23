@@ -1,48 +1,46 @@
-const x = 5;
-const y = 10;
+const age = 21;
 
-// if (x === y) {
-//   console.log("x is equal to y");
-// } else if (x > y) {
-//   console.log("x is greater than y");
+// if (age >= 18) {
+//   console.log("You are an adult");
 // } else {
-//   console.log("x is less than y");
+//   console.log("You are a minor");
 // }
 
-// Nested if
-const score = 60;
+age >= 18 ? console.log("You are an adult") : console.log("You are a minor");
 
-if (score <= 50) {
-  console.log("You need to practice more");
-  if (score < 30) {
-    console.log("Failed");
-  } else {
-    console.log("Just Passed");
-  }
-} else if (score > 50 && score < 75) {
-  console.log("Keep pushing");
-}
+const canVote = age >= 18 ? true : false;
+const canVote1 =
+  age >= 18
+    ? "You can vote"
+    : age < 12
+    ? "You are a child"
+    : "You are a teenager";
+console.log(canVote1);
 
-const color = "yellow";
+// For loops
+// for (let i = 0; i < 10; i++) {
+//   // block of code which will be repeated
 
-// if (color === "red" || color === "blue" || color === "green") {
-//   console.log("Color is red or blue");
+//   if (i === 7) {
+//     console.log("Number 7 is my favorite number");
+//   } else {
+//     console.log("Number", i);
+//   }
 // }
 
-// Switch case statement (===)
+// Nested loops
 
-switch (color) {
-  case "red":
-    console.log("Color is red");
-    break;
-  case "blue":
-    console.log("Color is blue");
-    break;
-  case "green":
-    console.log("Color is green");
-    break;
-  default:
-    console.log("COlor not supported");
+// for (let i = 0; i < 10; i++) {
+//   console.log("Outer loop", i);
+
+//   for (let j = 0; j < 5; j++) {
+//     console.log(`${i} * ${j} = ${i * j}`);
+//   }
+// }
+
+// Looping through arrays
+const cars = ["Ford", "Chevy", "Honda", "Toyota"];
+
+for (let i = 0; i < cars.length; i++) {
+  console.log(cars[i]);
 }
-
-// console.log("This is a test");
