@@ -1,35 +1,41 @@
-// function add(a, b) {
-//   return a + b;
-// }
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const add = (a, b) => {
-  return a + b;
-};
+// const doubleNumber = [];
 
-const subtract = (a, b) => a - b;
+// numbers.forEach(function (num) {
+//   doubleNumber.push(num * 2);
+// });
 
-const double = (a) => a * 2;
+// numbers.forEach((num) => {
+//   doubleNumber.push(num * 2);
+// });
 
-const createObj = () => ({
-  name: "Priya",
+const doubleNumbers = numbers.map((num) => "Number: " + num * 2);
+
+// Filters
+
+const evenNumbers = [];
+
+numbers.forEach((num) => {
+  if (num % 2 === 0) {
+    evenNumbers.push(num);
+  }
 });
 
-console.log(add(3, 4));
-console.log(subtract(3, 4));
-console.log(double(3));
+const evenNumbers2 = numbers.filter((num) => num % 2 === 0);
 
-console.log(createObj());
+// Reduce
+// let sum = 0;
 
-// ForEach
+// numbers.forEach((num) => {
+//   sum += num;
+// });
 
-const numbers = [1, 2, 8, 4, 9, 10];
+const sum = numbers.reduce((previous, current) => previous + current, 0);
 
-numbers.forEach((num) => console.log(num, "sdfs"));
+const doubleEvenNumbers = numbers
+  .filter((num) => num % 2 === 0)
+  .map((num) => num * 2)
+  .reduce((acc, cur) => acc + cur, 0);
 
-function callCallbackfn(callback) {
-  callback();
-}
-
-callCallbackfn(() =>
-  console.log("Hello, I am called from inside the function")
-);
+console.log(doubleEvenNumbers);
