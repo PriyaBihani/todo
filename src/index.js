@@ -1,50 +1,44 @@
 if (true) {
-  const y = 1;
-  console.log(y);
+  const a = 1;
+  let b = 2;
+  var c = 3;
+  console.log(a);
+  console.log(b);
+  console.log(c);
 }
 
-// console.log(y); // Reference error
-
-const x = 1;
-console.log(x, "in global scope");
+// console.log(a); // Reference error
+// console.log(b); // Reference error
+console.log(c);
 
 function run() {
-  // Access global variable in function scope
-  console.log(x, "in function scope");
+  var d = 100;
+  console.log(d, c);
 }
 
 run();
+// console.log(d);
+
+// Nested scopes
+
+function first() {
+  const x = 100;
+  function second() {
+    const y = 200;
+    console.log(x + y, "Nested scope");
+  }
+  // console.log(y); // Reference error
+  second();
+}
+
+first();
 
 if (true) {
-  console.log(x, "in block scope");
+  const x = 400;
+
+  if (x === 400) {
+    const y = 500;
+    console.log(x + y, "Nested scope");
+  }
+  // console.log(y); // Reference error
 }
-
-// Function are block/function scope
-function add() {
-  const x = 50;
-  const y = 100;
-  console.log(x, "in function scope");
-  console.log(y + x, "in function scope");
-}
-
-add();
-
-// console.log(y); // Reference error
-
-// An if statement are block scope
-if (true) {
-  console.log(x);
-  const y = 200;
-  console.log(x + y, "in block scope");
-}
-
-// console.log(y); // Reference error
-
-// A for loop are block scope
-for (let i = 0; i < 5; i++) {
-  let y = 10;
-  console.log(i + y, "in block scope");
-}
-
-// console.log(i); // Reference error
-// console.log(y); // Reference error
