@@ -1,44 +1,35 @@
-if (true) {
-  const a = 1;
-  let b = 2;
-  var c = 3;
-  console.log(a);
-  console.log(b);
-  console.log(c);
+// function add(a, b) {
+//   return a + b;
+// }
+
+const add = (a, b) => {
+  return a + b;
+};
+
+const subtract = (a, b) => a - b;
+
+const double = (a) => a * 2;
+
+const createObj = () => ({
+  name: "Priya",
+});
+
+console.log(add(3, 4));
+console.log(subtract(3, 4));
+console.log(double(3));
+
+console.log(createObj());
+
+// ForEach
+
+const numbers = [1, 2, 8, 4, 9, 10];
+
+numbers.forEach((num) => console.log(num, "sdfs"));
+
+function callCallbackfn(callback) {
+  callback();
 }
 
-// console.log(a); // Reference error
-// console.log(b); // Reference error
-console.log(c);
-
-function run() {
-  var d = 100;
-  console.log(d, c);
-}
-
-run();
-// console.log(d);
-
-// Nested scopes
-
-function first() {
-  const x = 100;
-  function second() {
-    const y = 200;
-    console.log(x + y, "Nested scope");
-  }
-  // console.log(y); // Reference error
-  second();
-}
-
-first();
-
-if (true) {
-  const x = 400;
-
-  if (x === 400) {
-    const y = 500;
-    console.log(x + y, "Nested scope");
-  }
-  // console.log(y); // Reference error
-}
+callCallbackfn(() =>
+  console.log("Hello, I am called from inside the function")
+);
