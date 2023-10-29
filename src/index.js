@@ -1,43 +1,32 @@
-// document.getElementById()
+// document.querySelectorAll()
 
-// Get Attribute
-console.log(document.getElementById("app-title"));
-console.log(document.getElementById("app-title").id);
-console.log(document.getElementById("app-title").class);
-console.log(document.getElementById("app-title").className);
-console.log(document.getElementById("app-title").getAttribute("class"));
+// Returns a NodeList
+const listItems = document.querySelectorAll("li");
 
-// Set Attribute
+// Access the elements by index
+console.log(listItems);
+// console.log(listItems[1].innerText);
 
-document.getElementById("app-title").setAttribute("class", "new-class");
-// document.getElementById("app-title").setAttribute("id", "whatever");
-document.getElementById("app-title").title = "Shopping List";
+listItems[1].style.color = "red"; // Error
 
-const title = document.getElementById("app-title");
-console.log(title);
+listItems.forEach((item, index) => {
+  item.style.color = "red";
 
-// Get / change content
-console.log(title.textContent);
-title.textContent = "Hello Worlds";
-title.innerText = "Hello, Again";
-title.innerHTML = `<i>hello inner HTML</i>`;
+  if (index % 2 === 0) {
+    item.style.backgroundColor = "lightgrey";
+  }
+});
 
-// Change styles
-title.style.color = "red";
-title.style.backgroundColor = "black";
-title.style.padding = "10px";
+// getElementsByClassName()
 
-// document.querySelector()
+const listItems2 = document.getElementsByClassName("item");
+console.log(listItems2);
+console.log(listItems2[0].innerText);
 
-console.log(document.querySelector("h1"));
-console.log(document.querySelector("#item-list"));
-console.log(document.querySelector(".container"));
-console.log(document.querySelector("input[type='text']"));
-console.log(document.querySelector("li:nth-child(2)").innerText);
+listItems2[0].style.color = "blue";
 
-const secondItem = document.querySelector("li:nth-child(2)");
-secondItem.style.color = "red";
-secondItem.innerHTML = `Juices
-<button class="remove-item btn-link text-red">
-  <i class="fa-solid fa-xmark"></i>
-</button>`;
+const listItem2Array = Array.from(listItems2);
+
+listItem2Array.forEach((item) => {
+  item.style.color = "black";
+});
