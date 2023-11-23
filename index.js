@@ -1,8 +1,31 @@
-const { add, subtract } = require("./math");
+const fs = require("fs");
+const path = require("path");
+const http = require("http");
+const os = require("os");
+const events = require("events");
+const util = require("util");
 
-// console.log(mathmodule);
-// console.log(mathmodule.add(1, 2));
-// console.log(mathmodule.subtract(1, 2));
+// fs.readFile("temp.txt", "utf8", (err, data) => {
+//   if (err) throw err;
+//   console.log(data);
+// });
 
-console.log(add(1, 2));
-console.log(subtract(1, 2));
+// fs.writeFile(
+//   "newFile.txt",
+//   "Hey, this is written using writeFile cdsadasf",
+//   (err) => {
+//     if (err) throw err;
+//     console.log("File written successfully");
+//   }
+// );
+
+const data = fs.readFileSync("temp.txt", "utf8");
+console.log(data);
+
+fs.writeFileSync(
+  "newFile.txt",
+  "Hey, this is written using writeFile cdsadasf"
+);
+console.log("File written successfully");
+
+console.log("HERE");
