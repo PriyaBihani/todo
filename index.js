@@ -1,24 +1,8 @@
-// let x = 10;
-// let y = 20;
+const { add, subtract } = require("./math");
 
-// console.log(x + y);
+// console.log(mathmodule);
+// console.log(mathmodule.add(1, 2));
+// console.log(mathmodule.subtract(1, 2));
 
-// function add(a, b) {
-//   return a + b;
-// }
-
-// console.log(add(2, 4));
-
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("Success");
-  }, 2000);
-});
-
-promise.then((res) => {
-  console.log(res);
-});
-
-// console.log(document);
-// console.log(window);
-console.log(fetch);
+console.log(add(1, 2));
+console.log(subtract(1, 2));
