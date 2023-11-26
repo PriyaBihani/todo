@@ -1,0 +1,28 @@
+{
+  "name": "devtown_fullstack_course",
+  "version": "1.0.0",
+  "description": "fullstack course for devtown",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "dosomething": "mkdir newfolder && cd newfolder && touch newfile.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevTownResources/devtown_MERN_course.git"
+  },
+  "author": "Priya Bihani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevTownResources/devtown_MERN_course/issues"
+  },
+  "homepage": "https://github.com/DevTownResources/devtown_MERN_course#readme",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
