@@ -8,14 +8,37 @@ app.get("/", (req, res) => {
   res.status(700).send("Hello World from express");
 });
 
-app.get("/posts", (req, res) => {
-  fs.readFile("./db.json", "utf-8", (err, data) => {
-    if (err) {
-      console.log(err);
-    }
+// app.get("/myname", (req, res) => {
+//   res.send("Hello ");
+// });
 
-    res.status(302).json(JSON.parse(data));
-  });
+app.get("/myname/:name", function (req, res) {
+  console.log(req.params);
+  const { name } = req.params;
+  res.status(200).send(`Hello my name is ${name}`);
+});
+
+app.get("/posts", (req, res) => {
+  console.log(req.query);
+  const { count } = req.query;
+  if (count) {
+    fs.readFile("./db.json", "utf-8", (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      const posts = JSON.parse(data);
+
+      res.status(302).json(posts.slice(0, count));
+    });
+  } else {
+    fs.readFile("./db.json", "utf-8", (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+
+      res.status(302).json(JSON.parse(data));
+    });
+  }
 });
 
 const PORT = 8000;
