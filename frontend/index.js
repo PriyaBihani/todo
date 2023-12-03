@@ -1,9 +1,10 @@
-const apiUrl = "https://jsonplaceholder.typicode.com/todos";
+const apiUrl = "http://localhost:8000/todos";
 
 const getToDos = () => {
-  fetch(apiUrl + "?_limit=5")
+  fetch(apiUrl)
     .then((res) => res.json())
-    .then((data) => {
+    .then(({ data, status, msg }) => {
+      console.log(data);
       data.forEach((todo) => {
         addToDoToDOM(todo);
       });
