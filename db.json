@@ -1,13 +1,13 @@
 [
   {
     "id": "b07541d5-c2d4-4507-a767-7cfec875a1cf",
-    "title": "This is todo",
-    "completed": false
+    "title": "this is an updated todo",
+    "completed": true
   },
   {
     "id": "1a3897d8-b8a9-4944-88b2-7ca663dcd01d",
     "title": "this is todoooo",
-    "completed": false
+    "completed": true
   },
   {
     "id": "9c08cc9d-7fdf-423b-905d-75b0dd36d242",

@@ -53,6 +53,48 @@ app.post("/todos", async (req, res) => {
   }
 });
 
+app.patch("/todos/:id", async (req, res) => {
+  try {
+    const data = await fs.promises.readFile("./db.json", "utf8");
+    const parsedData = JSON.parse(data);
+
+    const { id } = req.params;
+    const todo = parsedData.find((ele) => ele.id === id);
+
+    if (!todo) {
+      return res.status(404).json({
+        status: "error",
+        msg: "Todo not found",
+        data: null,
+      });
+    }
+
+    const updatedData = parsedData.map((ele) => {
+      if (ele.id === id) {
+        return {
+          ...ele,
+          ...req.body,
+        };
+      }
+      return ele;
+    });
+
+    await fs.promises.writeFile("./db.json", JSON.stringify(updatedData));
+
+    res.status(200).json({
+      status: "success",
+      msg: "Todo updated successfully",
+      data: updatedData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      msg: "Internal server error",
+      data: null,
+    });
+  }
+});
+
 app.delete("/todos/:id", async (req, res) => {
   try {
     const data = await fs.promises.readFile("./db.json", "utf8");
