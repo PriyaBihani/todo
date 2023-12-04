@@ -15,8 +15,12 @@ const addToDoToDOM = (todo) => {
   const div = document.createElement("div");
   div.classList.add("todo");
   div.appendChild(document.createTextNode(todo.title));
-
   div.setAttribute("data-id", todo.id);
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("delete");
+  deleteBtn.textContent = "Delete";
+  div.appendChild(deleteBtn);
 
   if (todo.completed) {
     div.classList.add("done");
@@ -30,7 +34,6 @@ const createToDo = (e) => {
 
   const newTodo = {
     title: document.querySelector("#todo-form input").value,
-    completed: false,
   };
 
   fetch(apiUrl, {
@@ -64,14 +67,15 @@ const updateToDo = (id, completed) => {
 };
 
 const deleteToDo = (e) => {
-  if (e.target.classList.contains("todo")) {
-    const id = e.target.dataset.id;
+  if (e.target.classList.contains("delete")) {
+    const id = e.target.parentElement.dataset.id;
+
     fetch(`${apiUrl}/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then(() => {
-        e.target.remove();
+        e.target.parentElement.remove();
       });
   }
 };
@@ -82,7 +86,7 @@ const init = () => {
   document
     .querySelector("#todo-list")
     .addEventListener("click", toggleCompleted);
-  document.querySelector("#todo-list").addEventListener("dblclick", deleteToDo);
+  document.querySelector("#todo-list").addEventListener("click", deleteToDo);
 };
 
 init();
