@@ -1,14 +1,16 @@
 const apiUrl = "http://localhost:8000/todos";
 
-const getToDos = () => {
-  fetch(apiUrl)
-    .then((res) => res.json())
-    .then(({ data, status, msg }) => {
-      console.log(data);
-      data.forEach((todo) => {
-        addToDoToDOM(todo);
-      });
+const getToDos = async () => {
+  try {
+    const res = await fetch(apiUrl);
+    const { data, status, msg } = await res.json();
+
+    data.forEach((todo) => {
+      addToDoToDOM(todo);
     });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const addToDoToDOM = (todo) => {
@@ -29,22 +31,26 @@ const addToDoToDOM = (todo) => {
   document.getElementById("todo-list").appendChild(div);
 };
 
-const createToDo = (e) => {
+const createToDo = async (e) => {
   e.preventDefault();
 
   const newTodo = {
     title: document.querySelector("#todo-form input").value,
   };
 
-  fetch(apiUrl, {
-    method: "POST",
-    body: JSON.stringify(newTodo),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => addToDoToDOM(data));
+  try {
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify(newTodo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    addToDoToDOM(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const toggleCompleted = (e) => {
@@ -54,29 +60,35 @@ const toggleCompleted = (e) => {
   }
 };
 
-const updateToDo = (id, completed) => {
-  fetch(`${apiUrl}/${id}`, {
-    method: "PATCH",
-    body: JSON.stringify({ completed }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+const updateToDo = async (id, completed) => {
+  try {
+    const res = await fetch(`${apiUrl}/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ completed }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const deleteToDo = (e) => {
+const deleteToDo = async (e) => {
   if (e.target.classList.contains("delete")) {
     const id = e.target.parentElement.dataset.id;
 
-    fetch(`${apiUrl}/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then(() => {
-        e.target.parentElement.remove();
+    try {
+      const res = await fetch(`${apiUrl}/${id}`, {
+        method: "DELETE",
       });
+      const data = await res.json();
+      e.target.parentElement.remove();
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
