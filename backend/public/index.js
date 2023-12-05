@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:8000/todos";
+const apiUrl = "http://localhost:8000/api/todos";
 
 const getToDos = async () => {
   try {
@@ -46,7 +46,8 @@ const createToDo = async (e) => {
         "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
+    const { data } = await res.json();
+
     addToDoToDOM(data);
   } catch (error) {
     console.log(error);

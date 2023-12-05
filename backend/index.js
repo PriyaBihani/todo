@@ -5,15 +5,22 @@ const fs = require("fs");
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(logger);
 app.use(express.json());
+app.use(express.static("public"));
 
-app.get("/ping", (req, res) => {
-  res.status(200).send("pong");
+// Pages Routes
+app.get("/login", (req, res) => {
+  res.sendFile(__dirname + "/pages/login.html");
 });
 
-app.get("/todos", async (req, res) => {
+app.get("/todos", (req, res) => {
+  res.sendFile(__dirname + "/pages/todos.html");
+});
+
+// API Routes
+app.get("/api/todos", async (req, res) => {
   try {
     const data = await fs.promises.readFile("./db.json", "utf8");
     const parsedData = JSON.parse(data);
@@ -31,20 +38,21 @@ app.get("/todos", async (req, res) => {
   }
 });
 
-app.post("/todos", async (req, res) => {
+app.post("/api/todos", async (req, res) => {
   try {
     const data = await fs.promises.readFile("./db.json", "utf8");
     const parsedData = JSON.parse(data);
-    parsedData.push({
+    const newTodo = {
       id: uuidv4(),
       title: req.body.title,
       completed: false,
-    });
+    };
+    parsedData.push(newTodo);
     await fs.promises.writeFile("./db.json", JSON.stringify(parsedData));
     res.status(201).json({
       status: "success",
       msg: "Todo created successfully",
-      data: parsedData,
+      data: newTodo,
     });
   } catch (error) {
     res.status(500).json({
@@ -55,7 +63,7 @@ app.post("/todos", async (req, res) => {
   }
 });
 
-app.patch("/todos/:id", async (req, res) => {
+app.patch("/api/todos/:id", async (req, res) => {
   try {
     const data = await fs.promises.readFile("./db.json", "utf8");
     const parsedData = JSON.parse(data);
@@ -97,7 +105,7 @@ app.patch("/todos/:id", async (req, res) => {
   }
 });
 
-app.delete("/todos/:id", async (req, res) => {
+app.delete("/api/todos/:id", async (req, res) => {
   try {
     const data = await fs.promises.readFile("./db.json", "utf8");
     const parsedData = JSON.parse(data);
