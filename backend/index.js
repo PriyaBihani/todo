@@ -19,14 +19,120 @@ app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/pages/signup.html");
 });
 
-app.get("/todos", (req, res) => {
+const authMiddleware = async (req, res, next) => {
+  try {
+    // Authorization
+    const data = await fs.promises.readFile("./tokens.json", "utf8");
+    const { tokens } = JSON.parse(data);
+    const { authorization } = req.headers;
+
+    if (!(authorization && tokens.includes(authorization))) {
+      return res.json({
+        status: "error",
+        msg: "Unauthorized",
+        data: null,
+      });
+    }
+    next();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+app.get("/todos", authMiddleware, (req, res) => {
   res.sendFile(__dirname + "/pages/todos.html");
 });
 
 // API Routes
 
 app.post("/api/signup", async (req, res) => {
-  //
+  try {
+    const { email, name, password } = req.body;
+    const data = await fs.promises.readFile("./users.json", "utf8");
+    const parsedData = JSON.parse(data);
+
+    if (parsedData.find((ele) => ele.email === email)) {
+      return res.status(400).json({
+        status: "error",
+        msg: "User already exists",
+        data: null,
+      });
+    }
+
+    const newUser = {
+      id: uuidv4(),
+      email,
+      name,
+      password,
+    };
+    parsedData.push(newUser);
+    await fs.promises.writeFile("./users.json", JSON.stringify(parsedData));
+    res.status(201).json({
+      status: "success",
+      msg: "User created successfully",
+      data: newUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      msg: "Internal server error",
+      data: null,
+    });
+  }
+});
+
+app.post("/api/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const data = await fs.promises.readFile("./users.json", "utf8");
+    const parsedData = JSON.parse(data);
+
+    const user = parsedData.find((ele) => ele.email === email);
+
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        msg: "User not found",
+        data: null,
+      });
+    }
+
+    // Authenticate user - verify password
+    if (user.password !== password) {
+      return res.status(400).json({
+        status: "error",
+        msg: "Incorrect password",
+        data: null,
+      });
+    }
+
+    const token = uuidv4();
+    const dataToken = await fs.promises.readFile("./tokens.json", "utf8");
+    const { tokens } = JSON.parse(dataToken);
+    tokens.push(token);
+
+    await fs.promises.writeFile(
+      "./tokens.json",
+      JSON.stringify({ tokens: tokens })
+    );
+
+    res.status(200).json({
+      status: "success",
+      msg: "User logged in successfully",
+      data: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        token,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      msg: "Internal server error",
+    });
+  }
 });
 
 app.get("/api/todos", async (req, res) => {
