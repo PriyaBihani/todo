@@ -15,11 +15,20 @@ app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/pages/login.html");
 });
 
+app.get("/signup", (req, res) => {
+  res.sendFile(__dirname + "/pages/signup.html");
+});
+
 app.get("/todos", (req, res) => {
   res.sendFile(__dirname + "/pages/todos.html");
 });
 
 // API Routes
+
+app.post("/api/signup", async (req, res) => {
+  //
+});
+
 app.get("/api/todos", async (req, res) => {
   try {
     const data = await fs.promises.readFile("./db.json", "utf8");
