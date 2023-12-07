@@ -93,5 +93,29 @@
         </div>
       </div>
     </section>
+    <script>
+      const form = document.querySelector("form");
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+
+        try {
+          const res = await fetch("http://localhost:8000/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+          if (res.ok) {
+            window.location.href = "/todos";
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      form.addEventListener("submit", handleSubmit);
+    </script>
   </body>
 </html>

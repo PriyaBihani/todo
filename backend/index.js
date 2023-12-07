@@ -17,15 +17,22 @@ app.use(express.static("public"));
 
 // Pages Routes
 app.get("/login", (req, res) => {
+  if (req.cookies.access_token) {
+    return res.redirect("/todos");
+  }
   res.sendFile(__dirname + "/pages/login.html");
 });
 
 app.get("/signup", (req, res) => {
+  if (req.cookies.access_token) {
+    return res.redirect("/todos");
+  }
   res.sendFile(__dirname + "/pages/signup.html");
 });
 
 app.get("/logout", (req, res) => {
   res.clearCookie("access_token");
+  res.redirect("/login");
 });
 
 const authMiddleware = async (req, res, next) => {
@@ -35,11 +42,7 @@ const authMiddleware = async (req, res, next) => {
     jwt.verify(token, secretKey);
     next();
   } catch (error) {
-    res.status(401).json({
-      status: "error",
-      msg: "Unauthorized",
-      data: null,
-    });
+    res.status(401).redirect("/login");
   }
 };
 
@@ -48,12 +51,13 @@ app.get("/todos", authMiddleware, (req, res) => {
 });
 
 // API Routes
-
 app.post("/api/signup", async (req, res) => {
   try {
+    if (req.cookies.access_token) {
+      return res.redirect("/todos");
+    }
     const { email, name, password } = req.body;
-    const data = await fs.promises.readFile("./users.json", "utf8");
-    const parsedData = JSON.parse(data);
+    const parsedData = await readFromFile("./users.json");
 
     if (parsedData.find((ele) => ele.email === email)) {
       return res.status(400).json({
@@ -70,7 +74,7 @@ app.post("/api/signup", async (req, res) => {
       password,
     };
     parsedData.push(newUser);
-    await fs.promises.writeFile("./users.json", JSON.stringify(parsedData));
+    await writeToFile("./users.json", parsedData);
     res.status(201).json({
       status: "success",
       msg: "User created successfully",
@@ -87,10 +91,12 @@ app.post("/api/signup", async (req, res) => {
 
 app.post("/api/login", async (req, res) => {
   try {
+    if (req.cookies.access_token) {
+      return res.redirect("/todos");
+    }
     const { email, password } = req.body;
 
-    const data = await fs.promises.readFile("./users.json", "utf8");
-    const parsedData = JSON.parse(data);
+    const parsedData = await readFromFile("./users.json");
 
     const user = parsedData.find((ele) => ele.email === email);
 
@@ -137,10 +143,10 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.get("/api/todos", async (req, res) => {
+app.get("/api/todos", authMiddleware, async (req, res) => {
   try {
-    const data = await fs.promises.readFile("./db.json", "utf8");
-    const parsedData = JSON.parse(data);
+    const parsedData = await readFromFile("./db.json");
+
     res.status(200).json({
       status: "success",
       msg: "Todos retrieved successfully",
@@ -155,17 +161,19 @@ app.get("/api/todos", async (req, res) => {
   }
 });
 
-app.post("/api/todos", async (req, res) => {
+app.post("/api/todos", authMiddleware, async (req, res) => {
   try {
-    const data = await fs.promises.readFile("./db.json", "utf8");
-    const parsedData = JSON.parse(data);
+    const parsedData = await readFromFile("./db.json");
+
     const newTodo = {
       id: uuidv4(),
       title: req.body.title,
       completed: false,
     };
     parsedData.push(newTodo);
-    await fs.promises.writeFile("./db.json", JSON.stringify(parsedData));
+
+    await writeToFile("./db.json", parsedData);
+
     res.status(201).json({
       status: "success",
       msg: "Todo created successfully",
@@ -180,10 +188,9 @@ app.post("/api/todos", async (req, res) => {
   }
 });
 
-app.patch("/api/todos/:id", async (req, res) => {
+app.patch("/api/todos/:id", authMiddleware, async (req, res) => {
   try {
-    const data = await fs.promises.readFile("./db.json", "utf8");
-    const parsedData = JSON.parse(data);
+    const parsedData = await readFromFile("./db.json");
 
     const { id } = req.params;
     const todo = parsedData.find((ele) => ele.id === id);
@@ -206,7 +213,7 @@ app.patch("/api/todos/:id", async (req, res) => {
       return ele;
     });
 
-    await fs.promises.writeFile("./db.json", JSON.stringify(updatedData));
+    await writeToFile("./db.json", updatedData);
 
     res.status(200).json({
       status: "success",
@@ -222,10 +229,9 @@ app.patch("/api/todos/:id", async (req, res) => {
   }
 });
 
-app.delete("/api/todos/:id", async (req, res) => {
+app.delete("/api/todos/:id", authMiddleware, async (req, res) => {
   try {
-    const data = await fs.promises.readFile("./db.json", "utf8");
-    const parsedData = JSON.parse(data);
+    const parsedData = await readFromFile("./db.json");
 
     const { id } = req.params;
     const todo = parsedData.find((ele) => ele.id === id);
@@ -239,7 +245,7 @@ app.delete("/api/todos/:id", async (req, res) => {
     }
 
     const filteredData = parsedData.filter((ele) => ele.id !== id);
-    await fs.promises.writeFile("./db.json", JSON.stringify(filteredData));
+    await writeToFile("./db.json", filteredData);
 
     res.status(200).json({
       status: "success",
@@ -254,6 +260,24 @@ app.delete("/api/todos/:id", async (req, res) => {
     });
   }
 });
+
+async function readFromFile(path) {
+  try {
+    const data = await fs.promises.readFile(path, "utf8");
+    return JSON.parse(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function writeToFile(path, data) {
+  try {
+    await fs.promises.writeFile(path, JSON.stringify(data));
+    return true;
+  } catch (error) {
+    throw error;
+  }
+}
 
 function logger(req, res, next) {
   console.log(req.method, req.url, new Date());
