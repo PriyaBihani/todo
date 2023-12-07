@@ -1,13 +1,18 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
+
+const secretKey = "thisisasecretkey";
 
 const app = express();
 
 // app.use(cors());
 app.use(logger);
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static("public"));
 
 // Pages Routes
@@ -19,23 +24,22 @@ app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/pages/signup.html");
 });
 
+app.get("/logout", (req, res) => {
+  res.clearCookie("access_token");
+});
+
 const authMiddleware = async (req, res, next) => {
   try {
     // Authorization
-    const data = await fs.promises.readFile("./tokens.json", "utf8");
-    const { tokens } = JSON.parse(data);
-    const { authorization } = req.headers;
-
-    if (!(authorization && tokens.includes(authorization))) {
-      return res.json({
-        status: "error",
-        msg: "Unauthorized",
-        data: null,
-      });
-    }
+    const token = req.cookies.access_token;
+    jwt.verify(token, secretKey);
     next();
   } catch (error) {
-    console.log(error);
+    res.status(401).json({
+      status: "error",
+      msg: "Unauthorized",
+      data: null,
+    });
   }
 };
 
@@ -107,26 +111,24 @@ app.post("/api/login", async (req, res) => {
       });
     }
 
-    const token = uuidv4();
-    const dataToken = await fs.promises.readFile("./tokens.json", "utf8");
-    const { tokens } = JSON.parse(dataToken);
-    tokens.push(token);
-
-    await fs.promises.writeFile(
-      "./tokens.json",
-      JSON.stringify({ tokens: tokens })
-    );
-
-    res.status(200).json({
-      status: "success",
-      msg: "User logged in successfully",
-      data: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        token,
-      },
+    const token = jwt.sign({ userId: user.id }, secretKey, {
+      expiresIn: "1d",
     });
+
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json({
+        status: "success",
+        msg: "User logged in successfully",
+        data: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+        },
+      });
   } catch (error) {
     res.status(500).json({
       status: "error",
