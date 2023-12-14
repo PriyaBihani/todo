@@ -24,7 +24,9 @@ app.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
-mongoose.connect("mongodb+srv://test:test@cluster0.ns07ha3.mongodb.net/");
+mongoose.connect(
+  "mongodb+srv://test:test@cluster0.ns07ha3.mongodb.net/todoapp"
+);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
