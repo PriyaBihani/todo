@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", authMiddleware, async (req, res) => {
   try {
-    const todos = await Todo.find().sort({ createdAt: -1 }).limit(10);
+    const todos = await Todo.find({ userId: req.userId });
 
     res.status(200).json({
       status: "success",
@@ -27,6 +27,7 @@ router.post("/", authMiddleware, async (req, res) => {
     const newTodo = new Todo({
       title: req.body.title,
       completed: false,
+      userId: req.userId,
     });
 
     await newTodo.save();

@@ -4,7 +4,9 @@ const authMiddleware = async (req, res, next) => {
   try {
     // Authorization
     const token = req.cookies.access_token;
-    jwt.verify(token, process.env.SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
+    req.userId = decoded.userId;
     next();
   } catch (error) {
     console.log(error);
