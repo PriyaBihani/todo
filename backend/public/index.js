@@ -17,7 +17,7 @@ const addToDoToDOM = (todo) => {
   const div = document.createElement("div");
   div.classList.add("todo");
   div.appendChild(document.createTextNode(todo.title));
-  div.setAttribute("data-id", todo.id);
+  div.setAttribute("data-id", todo._id);
 
   const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("delete");
@@ -85,7 +85,6 @@ const deleteToDo = async (e) => {
       const res = await fetch(`${apiUrl}/${id}`, {
         method: "DELETE",
       });
-      const data = await res.json();
       e.target.parentElement.remove();
     } catch (error) {
       console.log(error);

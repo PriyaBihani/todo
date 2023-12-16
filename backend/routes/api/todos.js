@@ -1,8 +1,6 @@
 const express = require("express");
 const Todo = require("../../models/todo");
 const { authMiddleware } = require("../../middlewares");
-const { readFromFile, writeToFile } = require("../../utils");
-const { v4: uuidv4 } = require("uuid");
 
 const router = express.Router();
 
@@ -49,12 +47,11 @@ router.post("/", authMiddleware, async (req, res) => {
 
 router.patch("/:id", authMiddleware, async (req, res) => {
   try {
-    const parsedData = await readFromFile("./db.json");
-
     const { id } = req.params;
-    const todo = parsedData.find((ele) => ele.id === id);
 
-    if (!todo) {
+    const doesTodoExist = await Todo.exists({ _id: id });
+
+    if (!doesTodoExist) {
       return res.status(404).json({
         status: "error",
         msg: "Todo not found",
@@ -62,17 +59,9 @@ router.patch("/:id", authMiddleware, async (req, res) => {
       });
     }
 
-    const updatedData = parsedData.map((ele) => {
-      if (ele.id === id) {
-        return {
-          ...ele,
-          ...req.body,
-        };
-      }
-      return ele;
+    const updatedData = await Todo.findByIdAndUpdate(id, req.body, {
+      new: true,
     });
-
-    await writeToFile("./db.json", updatedData);
 
     res.status(200).json({
       status: "success",
@@ -90,12 +79,11 @@ router.patch("/:id", authMiddleware, async (req, res) => {
 
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    const parsedData = await readFromFile("./db.json");
-
     const { id } = req.params;
-    const todo = parsedData.find((ele) => ele.id === id);
 
-    if (!todo) {
+    const doesTodoExist = await Todo.exists({ _id: id });
+
+    if (!doesTodoExist) {
       return res.status(404).json({
         status: "error",
         msg: "Todo not found",
@@ -103,13 +91,12 @@ router.delete("/:id", authMiddleware, async (req, res) => {
       });
     }
 
-    const filteredData = parsedData.filter((ele) => ele.id !== id);
-    await writeToFile("./db.json", filteredData);
+    await Todo.findByIdAndDelete(id);
 
     res.status(200).json({
       status: "success",
       msg: "Todo deleted successfully",
-      data: filteredData,
+      data: null,
     });
   } catch (error) {
     res.status(500).json({
