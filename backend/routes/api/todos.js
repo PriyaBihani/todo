@@ -6,8 +6,12 @@ const router = express.Router();
 
 router.get("/", authMiddleware, async (req, res) => {
   try {
-    const todos = await Todo.find({ userId: req.userId });
+    const todos = await Todo.find({ userId: req.userId }).populate(
+      "userId",
+      "-password"
+    );
 
+    console.log(todos);
     res.status(200).json({
       status: "success",
       msg: "Todos retrieved successfully",
@@ -50,12 +54,20 @@ router.patch("/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
 
-    const doesTodoExist = await Todo.exists({ _id: id });
+    const todo = await Todo.find({ _id: id });
 
-    if (!doesTodoExist) {
+    if (!todo) {
       return res.status(404).json({
         status: "error",
         msg: "Todo not found",
+        data: null,
+      });
+    }
+
+    if (todo.userId.toString() !== req.userId) {
+      return res.status(401).json({
+        status: "error",
+        msg: "Unauthorized",
         data: null,
       });
     }
@@ -92,7 +104,7 @@ router.delete("/:id", authMiddleware, async (req, res) => {
       });
     }
 
-    await Todo.findByIdAndDelete(id);
+    await Todo.findOneAndDelete({ _id: id, userId: req.userId });
 
     res.status(200).json({
       status: "success",
