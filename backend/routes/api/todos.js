@@ -1,5 +1,5 @@
 const express = require("express");
-
+const Todo = require("../../models/todo");
 const { authMiddleware } = require("../../middlewares");
 const { readFromFile, writeToFile } = require("../../utils");
 const { v4: uuidv4 } = require("uuid");
@@ -8,12 +8,12 @@ const router = express.Router();
 
 router.get("/", authMiddleware, async (req, res) => {
   try {
-    const parsedData = await readFromFile("./db.json");
+    const todos = await Todo.find().sort({ createdAt: -1 }).limit(10);
 
     res.status(200).json({
       status: "success",
       msg: "Todos retrieved successfully",
-      data: parsedData,
+      data: todos,
     });
   } catch (error) {
     res.status(500).json({
@@ -26,16 +26,12 @@ router.get("/", authMiddleware, async (req, res) => {
 
 router.post("/", authMiddleware, async (req, res) => {
   try {
-    const parsedData = await readFromFile("./db.json");
-
-    const newTodo = {
-      id: uuidv4(),
+    const newTodo = new Todo({
       title: req.body.title,
       completed: false,
-    };
-    parsedData.push(newTodo);
+    });
 
-    await writeToFile("./db.json", parsedData);
+    await newTodo.save();
 
     res.status(201).json({
       status: "success",
