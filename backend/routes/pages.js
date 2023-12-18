@@ -1,4 +1,5 @@
 const express = require("express");
+const Todo = require("./../models/todo");
 const { authMiddleware } = require("../middlewares");
 const path = require("path");
 
@@ -18,8 +19,24 @@ router.get("/signup", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../pages/signup.html"));
 });
 
-router.get("/todos", authMiddleware, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../pages/todos.html"));
+router.get("/todos", authMiddleware, async (req, res) => {
+  const todos = await Todo.find({ userId: req.userId }).populate(
+    "userId",
+    "-password"
+  );
+  res.send(`
+    <h1> Hello </h1>
+    ${todos
+      .map((todo) => {
+        return `<div>
+        <h3>${todo.title}</h3>
+        <p>${todo.completed}</p>
+        </div>`;
+      })
+      .join("")}
+  `);
+
+  // res.sendFile(path.resolve(__dirname, "../pages/todos.html"));
 });
 
 module.exports = router;
