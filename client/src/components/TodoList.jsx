@@ -1,15 +1,25 @@
-function TodoList() {
+function TodoList({ todos, handleComplete, handleDelete }) {
   return (
-    <main>
+    <>
       <ul>
-        <li>
-          Buy Milk
-          <button>Delete</button>
-        </li>
-        <li>Buy Eggs</li>
-        <li>Buy Bread</li>
+        {todos.length > 0 ? (
+          todos.map((todo) => (
+            <div key={todo.id}>
+              {todo.completed ? (
+                <li style={{ color: "red" }}>{todo.text}</li>
+              ) : (
+                <li>{todo.text}</li>
+              )}
+
+              <button onClick={() => handleComplete(todo.id)}>Complete</button>
+              <button onClick={() => handleDelete(todo.id)}>Delete</button>
+            </div>
+          ))
+        ) : (
+          <p>No todos</p>
+        )}
       </ul>
-    </main>
+    </>
   );
 }
 
